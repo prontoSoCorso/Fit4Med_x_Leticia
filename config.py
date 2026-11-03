@@ -45,5 +45,5 @@ CHANNELS = ["jointAngle_jRightHip", "jointAngle_jRightKnee", "jointAngle_jRightA
 
 # ---------- Models and evaluation ----------
 # Files in models/ that 05_evaluate.py runs. Add a model = add its file and its name here.
-MODELS_ENABLED = ["mean_baseline", "metadata_only", "svr", "knn", "random_forest"]
+MODELS_ENABLED = ["mean_baseline", "metadata_only", "svr", "knn", "random_forest", "minirocket"]
 N_BOOTSTRAP = 2000  # resamplings of the patients for the 95% confidence intervals
