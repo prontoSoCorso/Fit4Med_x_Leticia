@@ -13,6 +13,14 @@ On the lab workstation it already exists (Python 3.11), outside this folder:
 
 On another computer: create a Python 3.11 environment (`python3.11 -m venv myvenv`) and install the same file.
 
+## Run
+Numbered scripts, run from this folder, one at a time; each says at the top what it reads and writes.
+
+| Step | Command | What it does |
+|---|---|---|
+| 1 | `python 01_extract.py` | every `.mvnx` in `data/raw/` → one table per recording in `data/extracted/` |
+| 2 | `python 02_inventory.py` | what we have, what is missing or duplicated → `results/inventory.csv` |
+
 ## Folders
 | Folder / file | What it holds |
 |---|---|
