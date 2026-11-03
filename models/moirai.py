@@ -5,7 +5,6 @@ its transformer encoder (with a 'hook') while it makes a short forecast that we 
 The encoder gives one vector per patch of each channel: we average the patches of the window and
 put the channels side by side. The weights' licence (CC-BY-NC 4.0) allows research use only.
 """
-import numpy as np
 import torch
 from uni2ts.model.moirai2 import Moirai2Forecast, Moirai2Module
 

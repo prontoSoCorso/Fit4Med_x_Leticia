@@ -27,6 +27,17 @@ Numbered scripts, run from this folder, one at a time; each says at the top what
 | 3 | `python 03_make_windows.py` | cut the still parts, 4-second windows + hand-made features → `data/windows/` |
 | 4 | `python 04_embed_foundation.py [model ...]` | frozen foundation models describe each window → `data/embeddings/` |
 | 5 | `python 05_evaluate.py [model ...]` | leave-one-patient-out for each model → `results/predictions/` |
+| 6 | `python 06_report.py` | one table and one figure → `results/summary_table.csv`, `results/comparison.png` |
+
+Demo: 0, 2, 3, 4, 5, 6. Real data: 1 to 6. Steps 4-5 for the neural networks and foundation models
+need `requirements-deep.txt`. Leave-one-patient-out: each patient in turn is predicted by a model
+trained on all the other patients, so no patient ever helps predict itself.
+
+### Reading the results
+MAE is the mean error in mBI points (lower is better); the line around each dot is its 95% interval
+over patients. The mean-predictor baseline is the bar to beat. On the FAKE data the mBI was made as
+100 × walking speed + noise, so the models reach an MAE of about 5-7 (the noise alone costs about 4)
+against about 18 for the baseline: this only shows that the pipeline works.
 
 ### From the FAKE demo to the real data
 1. Delete the folder `data/extracted/` and the file `data/labels.csv` (they are the FAKE demo).
@@ -44,3 +55,11 @@ Numbered scripts, run from this folder, one at a time; each says at the top what
 | `docs/` | decisions taken, decisions proposed, open questions |
 | `CLAUDE.md`, `.claude/` | rules for Claude Code (a hook blocks `git push`) |
 | `data/`, `results/`, `examples/` | data and outputs, never in git |
+
+## If I want to change X, I open Y
+| To change | Open |
+|---|---|
+| paths, timepoints, target, channels, window length, "standing still" threshold, max/normal speed (`SPEED_BY_TAKE`), models that run | `config.py` |
+| one model (its network or its settings) · add a model | `models/<name>.py` · a new file in `models/` + its name in `MODELS_ENABLED` |
+| reading the .mvnx · cleaning and windows · features · validation · scores | `pipeline/` (`mvnx`, `preprocessing`, `features`, `evaluation`, `metrics`) |
+| the FAKE cohort · the final table and figure | `00_make_fake_cohort.py` · `06_report.py` |

@@ -19,4 +19,5 @@ Short dated entries (1-3 lines), newest last.
 - 2026-11-03 PatchTST (transformers) and UniTS are trained from scratch, no pretraining. UniTS = original model file (commit 0e02814, MIT) used through its 'classification' path with one output and squared error; no fallback was needed.
 - 2026-11-03 Foundation models stay frozen: embeddings computed once for all windows (step 4), Ridge trained per fold. Chronos-2 and MOMENT use their official embed(); MOIRAI has none, so its encoder output is recorded with a hook (unofficial, documented in models/moirai.py).
 - 2026-11-03 Ridge alphas 1 ... 10,000 (smaller ones gave ill-conditioned-matrix warnings with 10,000+ columns); MiniRocket re-run with the same grid.
+- 2026-11-03 Report: one table sorted by MAE and one dot-and-interval figure; FAKE data are flagged in the figure title and in the table's `data` column. The switch to real data was tried with the example .mvnx (steps 1-3; step 3 stops, as it should, without labels).
 - 2026-11-03 Neural networks: fixed settings (config.DEEP), early stopping on ~20% of the training patients, channels and label standardised with training numbers only; LSTM reads windows at 30 Hz.

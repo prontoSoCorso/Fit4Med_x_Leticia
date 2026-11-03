@@ -18,7 +18,7 @@ LENGTH, PATCH = 512, 8  # fixed by MOMENT
 
 def embed(windows):
     model = MOMENTPipeline.from_pretrained(config.FOUNDATION_CHECKPOINTS["moment"], model_kwargs={"task_name": "embedding"})
-    model.init()
+    model.init()  # its warning "only reconstruction head is pre-trained" does not matter: we use no head
     model = model.to(DEVICE).eval()
     n, channels, frames = windows.shape
     padded = np.zeros((n, channels, LENGTH), np.float32)
