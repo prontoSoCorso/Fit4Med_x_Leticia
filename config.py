@@ -46,8 +46,12 @@ CHANNELS = ["jointAngle_jRightHip", "jointAngle_jRightKnee", "jointAngle_jRightA
 # ---------- Models and evaluation ----------
 # Files in models/ that 05_evaluate.py runs. Add a model = add its file and its name here.
 MODELS_ENABLED = ["mean_baseline", "metadata_only", "svr", "knn", "random_forest", "minirocket",
-                  "cnn1d", "lstm", "patchtst", "units"]
+                  "cnn1d", "lstm", "patchtst", "units", "chronos2", "moment", "moirai"]
 N_BOOTSTRAP = 2000  # resamplings of the patients for the 95% confidence intervals
 # Neural networks: fixed settings (too few patients to tune them); training stops early when the
 # validation patients stop improving for `patience` epochs (one epoch = one pass over the training windows)
 DEEP = {"max_epochs": 100, "patience": 10, "batch_size": 32, "learning_rate": 1e-3}
+# Pretrained foundation models, downloaded once from Hugging Face. On a computer without a GPU use
+# the small versions: "autogluon/chronos-2-small" and "AutonLab/MOMENT-1-small".
+FOUNDATION_CHECKPOINTS = {"chronos2": "amazon/chronos-2", "moment": "AutonLab/MOMENT-1-large",
+                          "moirai": "Salesforce/moirai-2.0-R-small"}

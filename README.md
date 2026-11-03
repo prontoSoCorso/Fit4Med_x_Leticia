@@ -25,6 +25,7 @@ Numbered scripts, run from this folder, one at a time; each says at the top what
 | 1 | `python 01_extract.py` | every `.mvnx` in `data/raw/` → one table per recording in `data/extracted/` |
 | 2 | `python 02_inventory.py` | what we have, what is missing or duplicated → `results/inventory.csv` |
 | 3 | `python 03_make_windows.py` | cut the still parts, 4-second windows + hand-made features → `data/windows/` |
+| 4 | `python 04_embed_foundation.py [model ...]` | frozen foundation models describe each window → `data/embeddings/` |
 | 5 | `python 05_evaluate.py [model ...]` | leave-one-patient-out for each model → `results/predictions/` |
 
 ### From the FAKE demo to the real data

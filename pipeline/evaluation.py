@@ -6,9 +6,14 @@ never helps training, not even through another window, repetition or speed of th
 """
 import numpy as np
 import pandas as pd
+from sklearn.linear_model import Ridge
 from sklearn.model_selection import GridSearchCV, GroupKFold, GroupShuffleSplit, LeaveOneGroupOut
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
 
 import config
+
+RIDGE_ALPHAS = {"ridge__alpha": np.logspace(0, 4, 5)}  # 1 ... 10,000: thousands of columns need a strong penalty
 
 
 def tune(estimator, grid, X, y, groups):
@@ -20,6 +25,11 @@ def tune(estimator, grid, X, y, groups):
     folds = GroupKFold(n_splits=min(5, len(np.unique(groups))))
     search = GridSearchCV(estimator, grid, cv=folds, scoring="neg_mean_absolute_error")
     return search.fit(X, y, groups=groups).best_estimator_
+
+
+def fit_ridge(X, y, groups):
+    """Standardise the columns, then Ridge regression (linear, small weights) with alpha tuned by patient."""
+    return tune(make_pipeline(StandardScaler(), Ridge()), RIDGE_ALPHAS, X, y, groups)
 
 
 def split_validation(groups):
