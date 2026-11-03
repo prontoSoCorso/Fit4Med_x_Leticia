@@ -1,0 +1,10 @@
+# Light requirements: everything except the deep and foundation models. Python 3.11.
+# Versions are pinned to a set that also works with requirements-deep.txt
+# (MOIRAI's library needs numpy 1.26, scipy 1.11 and torch 2.4).
+numpy==1.26.4
+pandas==2.1.4
+scipy==1.11.4
+scikit-learn==1.7.2
+matplotlib==3.11.2
+aeon==1.3.0          # MiniRocket: thousands of random filters that turn a time series into features
+pytest==9.2.0
