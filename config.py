@@ -46,7 +46,8 @@ CHANNELS = ["jointAngle_jRightHip", "jointAngle_jRightKnee", "jointAngle_jRightA
 # ---------- Models and evaluation ----------
 # Files in models/ that 05_evaluate.py runs. Add a model = add its file and its name here.
 MODELS_ENABLED = ["mean_baseline", "metadata_only", "svr", "knn", "random_forest", "minirocket",
-                  "cnn1d", "lstm", "patchtst", "units", "chronos2", "moment", "moirai"]
+                  "cnn1d", "lstm", "patchtst", "units", "chronos2", "moment", "moirai",
+                  "ridge_features", "late_fusion"]
 N_BOOTSTRAP = 2000  # resamplings of the patients for the 95% confidence intervals
 # Neural networks: fixed settings (too few patients to tune them); training stops early when the
 # validation patients stop improving for `patience` epochs (one epoch = one pass over the training windows)
