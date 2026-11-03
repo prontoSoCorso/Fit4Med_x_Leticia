@@ -24,3 +24,21 @@ SPEEDS = ["normal", "max"]                                 # walking-speed confi
 SPEED_BY_TAKE = {}
 
 SEED = 42  # fixed random numbers: every run gives the same results
+
+# ---------- What to predict ----------
+INPUT_TIMEPOINT = "t0"                       # IMU recordings used as input
+TARGET_TIMEPOINT = "t0"                      # timepoint of the label to predict (later, e.g., "t1")
+TARGET = "mbi"                               # label column in labels.csv
+SPEEDS_USED = ["normal", "max", "unknown"]   # all recordings of a patient pooled together
+METADATA = ["age", "bmi", "hemisphere"]      # optional columns of labels.csv, used only if present
+
+# ---------- Cleaning and windows ----------
+STILL_SPEED_THRESHOLD = 0.15  # m/s: a slower pelvis means standing still; still parts at start and end are cut
+SMOOTHING_SECONDS = 0.5       # the pelvis speed is averaged over this time before applying the threshold
+WINDOW_SECONDS = 4.0          # length of one window (about 2-3 strides)
+WINDOW_OVERLAP = 0.5          # consecutive windows share half of their frames
+# Signals given to the models: each name selects the columns that start with it (x, y, z axes).
+# Joint angles avoid the slide-4 risks (no drift, no heading/yaw, no gravity); the pelvis vertical
+# acceleration is gravity-free and does not depend on the walking direction.
+CHANNELS = ["jointAngle_jRightHip", "jointAngle_jRightKnee", "jointAngle_jRightAnkle",
+            "jointAngle_jLeftHip", "jointAngle_jLeftKnee", "jointAngle_jLeftAnkle", "acceleration_Pelvis_z"]
