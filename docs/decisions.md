@@ -16,4 +16,5 @@ Short dated entries (1-3 lines), newest last.
 - 2026-11-03 MiniRocket is fitted once per outer fold on the training windows, then Ridge's alpha is tuned on its features. The inner validation patients take part in that label-free fit: no effect on the test patient, much faster.
 - 2026-11-03 MOIRAI: first deferred (its library cannot install on Python 3.13); the venv then moved to Python 3.11, so MOIRAI is back. Its library (uni2ts 2.0) pins numpy 1.26, scipy 1.11 and torch 2.4, so the whole venv uses that pip-resolved set.
 - 2026-11-03 Because of torch 2.4: transformers pinned to 4.57.6 (version 5 breaks with torch 2.4) and pyarrow to 21.0.0 (newer needs numpy 2 and breaks scikit-learn). Found by running, not by pip check.
+- 2026-11-03 PatchTST (transformers) and UniTS are trained from scratch, no pretraining. UniTS = original model file (commit 0e02814, MIT) used through its 'classification' path with one output and squared error; no fallback was needed.
 - 2026-11-03 Neural networks: fixed settings (config.DEEP), early stopping on ~20% of the training patients, channels and label standardised with training numbers only; LSTM reads windows at 30 Hz.
