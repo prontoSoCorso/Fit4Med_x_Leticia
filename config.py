@@ -42,3 +42,8 @@ WINDOW_OVERLAP = 0.5          # consecutive windows share half of their frames
 # acceleration is gravity-free and does not depend on the walking direction.
 CHANNELS = ["jointAngle_jRightHip", "jointAngle_jRightKnee", "jointAngle_jRightAnkle",
             "jointAngle_jLeftHip", "jointAngle_jLeftKnee", "jointAngle_jLeftAnkle", "acceleration_Pelvis_z"]
+
+# ---------- Models and evaluation ----------
+# Files in models/ that 05_evaluate.py runs. Add a model = add its file and its name here.
+MODELS_ENABLED = ["mean_baseline", "metadata_only"]
+N_BOOTSTRAP = 2000  # resamplings of the patients for the 95% confidence intervals
