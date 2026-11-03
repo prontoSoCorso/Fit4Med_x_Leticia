@@ -4,7 +4,7 @@ from types import SimpleNamespace
 import numpy as np
 import pandas as pd
 
-from pipeline.evaluation import evaluate
+from pipeline.evaluation import evaluate, split_validation
 from pipeline.metrics import scores_with_ci
 
 
@@ -17,6 +17,9 @@ def test_no_leakage_between_patients():
                           predict=lambda seen, X: np.array([float(x in seen) for x in X[:, 0]]))
     predictions = evaluate(spy, X, y, groups)
     assert len(predictions) == 5 and (predictions["y_pred"] == 0).all()
+    # Early stopping: validation patients are whole patients, never also in training
+    fit_rows, validation_rows = split_validation(groups)
+    assert len(validation_rows) and not set(groups[fit_rows]) & set(groups[validation_rows])
 
 
 def test_scores_and_intervals():

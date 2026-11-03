@@ -12,6 +12,9 @@ On the lab workstation it already exists (Python 3.11), outside this folder:
     pip install -r requirements.txt
 
 On another computer: create a Python 3.11 environment (`python3.11 -m venv myvenv`) and install the same file.
+Neural networks and foundation models need the heavy libraries too (several GB, see the file for computers without a GPU):
+
+    pip install -r requirements.txt -r requirements-deep.txt
 
 ## Run
 Numbered scripts, run from this folder, one at a time; each says at the top what it reads and writes.

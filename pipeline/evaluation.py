@@ -6,7 +6,9 @@ never helps training, not even through another window, repetition or speed of th
 """
 import numpy as np
 import pandas as pd
-from sklearn.model_selection import GridSearchCV, GroupKFold, LeaveOneGroupOut
+from sklearn.model_selection import GridSearchCV, GroupKFold, GroupShuffleSplit, LeaveOneGroupOut
+
+import config
 
 
 def tune(estimator, grid, X, y, groups):
@@ -18,6 +20,13 @@ def tune(estimator, grid, X, y, groups):
     folds = GroupKFold(n_splits=min(5, len(np.unique(groups))))
     search = GridSearchCV(estimator, grid, cv=folds, scoring="neg_mean_absolute_error")
     return search.fit(X, y, groups=groups).best_estimator_
+
+
+def split_validation(groups):
+    """Rows for training and for validation (early stopping): about 20% of the training patients,
+    never a part of one patient's windows."""
+    splitter = GroupShuffleSplit(n_splits=1, test_size=0.2, random_state=config.SEED)
+    return next(splitter.split(groups, groups=groups))
 
 
 def evaluate(model, X, y, groups):

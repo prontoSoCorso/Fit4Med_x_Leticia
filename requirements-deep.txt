@@ -1,0 +1,12 @@
+# Heavy requirements: deep and foundation models. Install after requirements.txt (Python 3.11).
+# Computer without an NVIDIA GPU: first run
+#     pip install torch==2.4.1 --index-url https://download.pytorch.org/whl/cpu
+# (much smaller download), then this file.
+torch==2.4.1                # neural networks: 1D-CNN, LSTM, PatchTST, UniTS, foundation models
+transformers==4.57.6        # PatchTST (Hugging Face); version 5 does not work with torch 2.4
+timm==1.0.30                # small building blocks used by the original UniTS code
+chronos-forecasting==2.3.2  # Chronos-2 (Amazon)
+uni2ts==2.0.0               # MOIRAI (Salesforce); it forces numpy 1.26, scipy 1.11, torch 2.4
+pyarrow==21.0.0             # pulled in by MOIRAI; newer versions need numpy 2 and break scikit-learn here
+# MOMENT from GitHub: the PyPI version pins old libraries that clash with the ones above
+momentfm @ git+https://github.com/moment-timeseries-foundation-model/moment.git@38f7310ad594100747ca2a8357e9c7ca7d323e0e
