@@ -63,7 +63,7 @@ def mvnx_to_csv(mvnx_path, csv_path):
                 names[NAME_LISTS[tag]] = [item.get("label") for item in element]
             elif event == "end" and tag == "frame":
                 if element.get("type") == "normal":
-                    values = {local_tag(child): child.text.split() for child in element}
+                    values = {local_tag(child): (child.text or "").split() for child in element}
                     if columns is None:
                         columns = column_names(values, names)
                         writer.writerow(["time_s"] + columns)
@@ -74,6 +74,8 @@ def mvnx_to_csv(mvnx_path, csv_path):
                     writer.writerow(row)
                     n_frames += 1
                 element.clear()  # this frame is written: free its memory
+    if n_frames == 0:
+        raise ValueError(f"{mvnx_path}: no 'normal' frames (only calibration poses?): is the recording empty?")
     return header, n_frames
 
 

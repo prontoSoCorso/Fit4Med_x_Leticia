@@ -3,6 +3,8 @@
 Example pipeline for the Fit4Med study (post-stroke patients). It reads Xsens `.mvnx` recordings
 and predicts the modified Barthel Index (mBI, 0-100) with classical, deep and foundation models.
 Until the real data arrive it runs on a **FAKE** cohort: its numbers have no scientific value.
+References like "slide 7" in the code point to the number printed on each slide of the presentation
+*Fit4Med Time Series ML* (e.g. "07 / 16").
 
 ## Setup (once)
 A virtual environment is a private copy of Python with its own libraries, so this project cannot break others.
@@ -21,7 +23,7 @@ Numbered scripts, run from this folder, one at a time; each says at the top what
 
 | Step | Command | What it does |
 |---|---|---|
-| 0 | `python 00_make_fake_cohort.py` | demo only, instead of step 1: 20 FAKE patients made from the example recording |
+| 0 | `python 00_make_fake_cohort.py` | demo only, instead of step 1: 20 FAKE patients made from the example recording (about 0.5 GB) |
 | 1 | `python 01_extract.py` | every `.mvnx` in `data/raw/` → one table per recording in `data/extracted/` |
 | 2 | `python 02_inventory.py` | what we have, what is missing or duplicated → `results/inventory.csv` |
 | 3 | `python 03_make_windows.py` | cut the still parts, 4-second windows + hand-made features → `data/windows/` |
@@ -37,7 +39,8 @@ trained on all the other patients, so no patient ever helps predict itself.
 MAE is the mean error in mBI points (lower is better); the line around each dot is its 95% interval
 over patients. The mean-predictor baseline is the bar to beat. On the FAKE data the mBI was made as
 100 × walking speed + noise, so the models reach an MAE of about 5-7 (the noise alone costs about 4)
-against about 18 for the baseline: this only shows that the pipeline works.
+against about 18 for the baseline: this only shows that the pipeline works. On a GPU the neural
+networks can change slightly from run to run (here by about 0.1-0.2 MAE points).
 
 ### From the FAKE demo to the real data
 1. Delete the folder `data/extracted/` and the file `data/labels.csv` (they are the FAKE demo).

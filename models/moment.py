@@ -21,6 +21,8 @@ def embed(windows):
     model.init()  # its warning "only reconstruction head is pre-trained" does not matter: we use no head
     model = model.to(DEVICE).eval()
     n, channels, frames = windows.shape
+    if frames > LENGTH:
+        raise ValueError(f"MOMENT reads at most {LENGTH} frames per window: lower WINDOW_SECONDS in config.py.")
     padded = np.zeros((n, channels, LENGTH), np.float32)
     padded[:, :, -frames:] = windows
     mask = np.zeros((n, LENGTH), np.float32)

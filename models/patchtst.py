@@ -1,4 +1,4 @@
-"""PatchTST (slide 11), from Hugging Face transformers, trained from scratch on the windows.
+"""PatchTST (slide 12), from Hugging Face transformers, trained from scratch on the windows.
 
 Each channel is cut into short pieces (patches, like words in a sentence) and a transformer
 reads them; every channel is handled separately with shared weights (channel independence).

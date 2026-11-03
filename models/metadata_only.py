@@ -1,4 +1,4 @@
-"""Baseline: Ridge regression on the metadata only (age, BMI, hemisphere; slide 6).
+"""Baseline: Ridge regression on the metadata only (age, BMI, hemisphere; slide 7).
 
 If the IMU models cannot beat it, the movement signals add nothing beyond the metadata.
 Ridge = linear regression that keeps the weights small; alpha says how strongly.

@@ -35,8 +35,9 @@ def main():
     stats = pd.DataFrame([recording_stats(pd.read_csv(config.EXTRACTED_DIR / f)) for f in recordings["file"]])
     inventory = pd.concat([recordings, stats], axis=1).sort_values(["subject", "rec_date"])
 
-    # The same recording exported twice, or two files claiming the same take: keep the first one
-    copies = inventory.duplicated(["subject", "rec_date"]) | inventory.duplicated(["subject", "test", "timepoint", "take"])
+    # The same recording exported twice (same start time), or two files claiming the same take: keep the first one
+    same_start = inventory.duplicated(["subject", "rec_date"]) & inventory["rec_date"].notna()
+    copies = same_start | inventory.duplicated(["subject", "test", "timepoint", "take"])
     inventory["status"] = np.where(copies, "duplicate", "ok")
     ok = inventory["status"] == "ok"
     inventory.loc[ok, "repetition"] = inventory[ok].groupby(["subject", "test", "timepoint", "speed"]).cumcount() + 1

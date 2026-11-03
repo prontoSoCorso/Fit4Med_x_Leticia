@@ -7,5 +7,5 @@ Options and a recommendation; the code uses the recommendation until someone dec
 - 2026-11-03 Cleaning/windows: walking = pelvis horizontal speed > 0.15 m/s (0.5 s mean); 4 s windows, 50% overlap (~9 per trial). Rec.: as stated; revisit after the inventory.
 - 2026-11-03 Bilateral features: side-agnostic |L−R|/(L+R) now; affected vs unaffected side once hemisphere is known for all. Rec.: side-agnostic.
 - 2026-11-03 Foundation models: chronos-2 (120M parameters), MOMENT-1-large (346M, installed from GitHub), moirai-2.0-R-small (11M; CC-BY-NC license, research only; no official embedding function). Embedding = mean over time, concatenated over channels. Laptop: chronos-2-small, MOMENT-1-small. Rec.: as stated.
-- 2026-11-03 Late fusion: (a) concatenate IMU features + metadata → Ridge (slide 11); (b) stacking of predictions. Always report metadata-only, IMU-only (same Ridge), fused. Rec.: (a).
+- 2026-11-03 Late fusion: (a) concatenate IMU features + metadata → Ridge (slide 13); (b) stacking of predictions. Always report metadata-only, IMU-only (same Ridge), fused. Rec.: (a).
 - 2026-11-03 Storage: one CSV per recording (~12 MB, opens in Excel) vs Parquet (~10× smaller, needs pyarrow). Rec.: CSV.

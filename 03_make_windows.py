@@ -42,6 +42,9 @@ def usable_recordings():
 
 def main():
     labels, recordings = load_labels(), usable_recordings()
+    if recordings["frame_rate"].nunique() > 1:
+        sys.exit(f"The recordings have different frame rates {sorted(recordings['frame_rate'].unique())}: "
+                 "windows would differ in length (resampling is not implemented).")
     print(f"No {config.TARGET} at {config.TARGET_TIMEPOINT}, skipped: {sorted(set(recordings['subject']) - set(labels.index))}")
     print(f"Labels without {config.INPUT_TIMEPOINT} recordings: {sorted(set(labels.index) - set(recordings['subject']))}")
 
@@ -50,6 +53,8 @@ def main():
         table = pd.read_csv(config.EXTRACTED_DIR / rec.file)
         walk, channels = walking_part(table, rec.frame_rate), channel_columns(table)
         starts, length = window_starts(len(walk), rec.frame_rate)
+        if not starts:
+            print(f"{rec.file}: walking part shorter than one window, not used")
         for start in starts:
             window = walk.iloc[start:start + length]
             values, feats = window[channels].to_numpy().T, window_features(window, channels, rec.frame_rate)

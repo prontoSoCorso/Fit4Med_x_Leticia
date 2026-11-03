@@ -80,7 +80,7 @@ def check_no_real_data():
     real_tables = [f for f in config.EXTRACTED_DIR.glob("*.csv") if not f.name.startswith(("FAKE", "recordings"))]
     if real_tables:
         sys.exit(f"{config.EXTRACTED_DIR} holds real recordings: move that folder away before building the FAKE demo.")
-    if config.LABELS_CSV.exists() and not pd.read_csv(config.LABELS_CSV)["subject"].str.startswith("FAKE").all():
+    if config.LABELS_CSV.exists() and not pd.read_csv(config.LABELS_CSV)["subject"].astype(str).str.startswith("FAKE").all():
         sys.exit(f"{config.LABELS_CSV} holds real labels: move it away before building the FAKE demo.")
     if not config.EXAMPLE_MVNX.exists():
         sys.exit(f"{config.EXAMPLE_MVNX} not found: the demo needs one real .mvnx (see EXAMPLE_MVNX in config.py).")
@@ -92,7 +92,7 @@ def main():
     with tempfile.TemporaryDirectory() as tmp:
         mvnx_to_csv(config.EXAMPLE_MVNX, Path(tmp) / "example.csv")
         base = pd.read_csv(Path(tmp) / "example.csv")
-    base_speed = walked_distance(base) / base["time_s"].iloc[-1]  # mean speed of the example, m/s
+    base_speed = walked_distance(base) / (base["time_s"].iloc[-1] - base["time_s"].iloc[0])  # example's mean speed, m/s
     rng = np.random.default_rng(config.SEED)
 
     recordings, labels = [], []

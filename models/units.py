@@ -1,4 +1,4 @@
-"""UniTS (slide 11): one transformer built for many time-series tasks, trained from scratch on the windows.
+"""UniTS (slide 12): one transformer built for many time-series tasks, trained from scratch on the windows.
 
 It uses the original model code (models/third_party/units_original.py, MIT licence, unchanged)
 through its 'classification' path with a single output, trained with the squared error: a regressor.

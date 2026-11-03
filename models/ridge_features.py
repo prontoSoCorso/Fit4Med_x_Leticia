@@ -1,4 +1,4 @@
-"""Ridge regression on the hand-made features: the 'IMU only' arm of the late-fusion comparison (slide 11).
+"""Ridge regression on the hand-made features: the 'IMU only' arm of the late-fusion comparison (slide 13).
 
 It uses the same head as late_fusion.py, so the two differ only by the metadata.
 """

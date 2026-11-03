@@ -52,7 +52,11 @@ def main():
     out_dir.mkdir(parents=True, exist_ok=True)
 
     for name in sys.argv[1:] or config.MODELS_ENABLED:
-        model = importlib.import_module(f"models.{name}")  # the file models/<name>.py
+        try:
+            model = importlib.import_module(f"models.{name}")  # the file models/<name>.py
+        except ImportError as error:
+            print(f"{name}: skipped, missing library ({error.name}): pip install -r requirements-deep.txt")
+            continue
         X = model_input(model.INPUT, name, info)
         if X is None:
             print(f"{name}: skipped, labels.csv has none of the metadata columns {config.METADATA}")

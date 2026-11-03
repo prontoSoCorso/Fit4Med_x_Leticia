@@ -7,7 +7,7 @@ Short dated entries (1-3 lines), newest last.
 - 2026-11-03 Code: numbered scripts plus small modules; no notebooks.
 - 2026-11-03 Demo with a FAKE cohort built from one real .mvnx; its numbers have no scientific value.
 - 2026-11-03 Validation: leave-one-patient-out outer loop; tuning on training patients only.
-- 2026-11-03 Git: Claude commits (one per milestone, on branch `example-pipeline`) but never pushes; a PreToolUse hook blocks `git push`.
+- 2026-11-03 Git: Claude commits (one per milestone, on `main`) but never pushes; a PreToolUse hook blocks `git push`.
 - 2026-11-03 Anonymization is not handled in this phase.
 - 2026-11-03 Fake cohort written directly as extracted tables (no fake .mvnx files): the simplest way.
 - 2026-11-03 Extraction: subject/test/timepoint/take come from the header's `originalFilename` (disk name as fallback); `-004` is the Xsens take number. Columns are `<group>_<name>_<axis>`; centerOfMass = position, velocity, acceleration (checked on the example).
@@ -21,3 +21,4 @@ Short dated entries (1-3 lines), newest last.
 - 2026-11-03 Ridge alphas 1 ... 10,000 (smaller ones gave ill-conditioned-matrix warnings with 10,000+ columns); MiniRocket re-run with the same grid.
 - 2026-11-03 Report: one table sorted by MAE and one dot-and-interval figure; FAKE data are flagged in the figure title and in the table's `data` column. The switch to real data was tried with the example .mvnx (steps 1-3; step 3 stops, as it should, without labels).
 - 2026-11-03 Neural networks: fixed settings (config.DEEP), early stopping on ~20% of the training patients, channels and label standardised with training numbers only; LSTM reads windows at 30 Hz.
+- 2026-11-03 Final review: clear errors for an empty .mvnx, mixed frame rates, too-long MOMENT windows and missing deep libraries (the model is skipped); numeric subject IDs work; recordings without a date are never marked duplicate; "slide N" = number printed on the slide.
