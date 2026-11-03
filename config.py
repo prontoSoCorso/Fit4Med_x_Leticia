@@ -22,3 +22,5 @@ SPEEDS = ["normal", "max"]                                 # walking-speed confi
 # The .mvnx files do not say which take was at normal or at max speed. Fill this map when the
 # protocol is known, e.g. {1: "normal", 2: "normal", 3: "max", 4: "max"}, then run 01_extract.py again.
 SPEED_BY_TAKE = {}
+
+SEED = 42  # fixed random numbers: every run gives the same results

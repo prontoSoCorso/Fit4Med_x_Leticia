@@ -18,8 +18,15 @@ Numbered scripts, run from this folder, one at a time; each says at the top what
 
 | Step | Command | What it does |
 |---|---|---|
+| 0 | `python 00_make_fake_cohort.py` | demo only, instead of step 1: 20 FAKE patients made from the example recording |
 | 1 | `python 01_extract.py` | every `.mvnx` in `data/raw/` → one table per recording in `data/extracted/` |
 | 2 | `python 02_inventory.py` | what we have, what is missing or duplicated → `results/inventory.csv` |
+
+### From the FAKE demo to the real data
+1. Delete the folder `data/extracted/` and the file `data/labels.csv` (they are the FAKE demo).
+2. Copy the `.mvnx` files into `data/raw/` and the real `labels.csv` (columns `subject, timepoint, mbi`,
+   optionally `age, bmi, hemisphere`) into `data/`.
+3. Run the steps again from 1.
 
 ## Folders
 | Folder / file | What it holds |
