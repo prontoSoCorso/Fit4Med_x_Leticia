@@ -1,6 +1,5 @@
 # Patient data, large files and outputs never go to git
 data/
-results/
 examples/
 
 # Python environments and caches
